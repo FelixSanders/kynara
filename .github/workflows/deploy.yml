@@ -26,21 +26,30 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Debug repo structure
+        run: |
+          echo "📂 Current directory: $(pwd)"
+          echo "📁 Listing top-level files..."
+          ls -al
+          echo "🔍 Checking for vite.config.ts..."
+          find . -maxdepth 2 -name "vite.config.*" || true
+
       - name: Build Vite app
         run: npm run build
+        working-directory: .
 
       - name: Verify build output
         run: |
-          echo "Listing dist directory..."
+          echo "🧱 Listing dist directory..."
           ls -R dist || (echo "❌ No dist folder found!" && exit 1)
-          echo "Checking index.html base path:"
+          echo "🔍 Checking index.html base path:"
           grep -Eo '<script.*src=.*>' dist/index.html || true
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
-          path: ./dist     # ✅ matches Vite outDir in vite.config.ts
+          path: ./dist      # ✅ matches Vite outDir in vite.config.ts
           retention-days: 1
 
   deploy:
