@@ -1875,22 +1875,26 @@
             filtersSection.classList.toggle('hidden');
         }
 
-        // Auto fullscreen if URL has ?fullscreen=true or /fullscreen=true
+ // Enable fullscreen if URL has ?fullscreen=true or /fullscreen=true
 (function() {
-  const isFullscreenParam = window.location.search.includes('fullscreen=true') 
-    || window.location.pathname.includes('fullscreen=true');
+  const url = window.location.href;
+  const isFullscreenParam = url.includes('fullscreen=true');
 
   if (isFullscreenParam) {
-    document.addEventListener('DOMContentLoaded', () => {
-      const elem = document.documentElement; // entire page
-      if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
-      }
-    });
+    // Wait for user interaction before requesting fullscreen
+    const enableFullscreen = () => {
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) elem.requestFullscreen();
+      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+      else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+
+      document.removeEventListener('click', enableFullscreen);
+      document.removeEventListener('touchstart', enableFullscreen);
+    };
+
+    // Add listener for first user interaction
+    document.addEventListener('click', enableFullscreen);
+    document.addEventListener('touchstart', enableFullscreen);
   }
 })();
 
