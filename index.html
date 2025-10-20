@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Kynara</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -1874,6 +1874,26 @@
             const filtersSection = document.getElementById('filters-section');
             filtersSection.classList.toggle('hidden');
         }
+
+        // Auto fullscreen if URL has ?fullscreen=true or /fullscreen=true
+(function() {
+  const isFullscreenParam = window.location.search.includes('fullscreen=true') 
+    || window.location.pathname.includes('fullscreen=true');
+
+  if (isFullscreenParam) {
+    document.addEventListener('DOMContentLoaded', () => {
+      const elem = document.documentElement; // entire page
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+    });
+  }
+})();
+
 
         // Initialize app
         init();
