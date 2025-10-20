@@ -1875,29 +1875,7 @@
             filtersSection.classList.toggle('hidden');
         }
 
- // Enable fullscreen if URL has ?fullscreen=true or /fullscreen=true
-(function() {
-  const url = window.location.href;
-  const isFullscreenParam = url.includes('fullscreen=true');
-
-  if (isFullscreenParam) {
-    // Wait for user interaction before requesting fullscreen
-    const enableFullscreen = () => {
-      const elem = document.documentElement;
-      if (elem.requestFullscreen) elem.requestFullscreen();
-      else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-      else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
-
-      document.removeEventListener('click', enableFullscreen);
-      document.removeEventListener('touchstart', enableFullscreen);
-    };
-
-    // Add listener for first user interaction
-    document.addEventListener('click', enableFullscreen);
-    document.addEventListener('touchstart', enableFullscreen);
-  }
-})();
-
+        
 
         // Initialize app
         init();
