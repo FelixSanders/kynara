@@ -48,7 +48,7 @@
         
         .nav-glass {
             backdrop-filter: blur(40px);
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.6);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -446,9 +446,7 @@
                     <div class="text-center mb-8">
                         <h2 class="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h2>
                         <p class="text-gray-600">Sign in to your account to continue</p>
-                        <div class="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-3 rounded-xl mt-6">
-                            <p class="text-sm"><strong>Demo Notice:</strong> This is a sample login form for demonstration purposes only.</p>
-                        </div>
+
                     </div>
                     
                     <div class="bg-white p-8 rounded-2xl shadow-lg">
@@ -581,7 +579,7 @@
                                         </div>
                                         <p class="text-gray-600 text-sm mb-2">Luxury Percale Sheet Set, Memory Foam Pillow</p>
                                         <div class="flex justify-between items-center">
-                                            <span class="font-bold text-gradient">$319.98</span>
+                                            <span class="font-bold text-gradient">Rp 4.799.700</span>
                                             <span class="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">Delivered</span>
                                         </div>
                                     </div>
@@ -592,7 +590,7 @@
                                         </div>
                                         <p class="text-gray-600 text-sm mb-2">Bamboo Fiber Duvet Cover</p>
                                         <div class="flex justify-between items-center">
-                                            <span class="font-bold text-gradient">$159.99</span>
+                                            <span class="font-bold text-gradient">Rp 2.399.850</span>
                                             <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Shipped</span>
                                         </div>
                                     </div>
@@ -660,9 +658,7 @@
                 <div class="max-w-6xl mx-auto px-4">
                     <h1 class="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
                     
-                    <div class="bg-yellow-50 border border-yellow-200 text-yellow-800 px-6 py-4 rounded-xl mb-8">
-                        <p><strong>Demo Notice:</strong> This is a sample checkout form. No real payments will be processed.</p>
-                    </div>
+
                     
                     <div class="grid lg:grid-cols-2 gap-12">
                         <div>
@@ -711,21 +707,39 @@
                                         </div>
                                     </label>
                                     <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <input type="radio" name="payment" value="paypal" class="mr-4">
+                                        <input type="radio" name="payment" value="qris" class="mr-4">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                                📱
+                                            </div>
+                                            <span class="font-medium">QRIS</span>
+                                        </div>
+                                    </label>
+                                    <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors">
+                                        <input type="radio" name="payment" value="bca" class="mr-4">
                                         <div class="flex items-center">
                                             <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
                                                 🏦
                                             </div>
-                                            <span class="font-medium">PayPal</span>
+                                            <span class="font-medium">BCA Virtual Account</span>
                                         </div>
                                     </label>
                                     <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors">
-                                        <input type="radio" name="payment" value="apple" class="mr-4">
+                                        <input type="radio" name="payment" value="bni" class="mr-4">
                                         <div class="flex items-center">
-                                            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                                                📱
+                                            <div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
+                                                🏦
                                             </div>
-                                            <span class="font-medium">Apple Pay</span>
+                                            <span class="font-medium">BNI Virtual Account</span>
+                                        </div>
+                                    </label>
+                                    <label class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors">
+                                        <input type="radio" name="payment" value="mandiri" class="mr-4">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center mr-3">
+                                                🏦
+                                            </div>
+                                            <span class="font-medium">Mandiri Virtual Account</span>
                                         </div>
                                     </label>
                                 </div>
@@ -768,6 +782,20 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Payment Modal -->
+        <div id="payment-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 hidden">
+            <div class="bg-white rounded-2xl max-w-md w-full p-8">
+                <div class="text-center">
+                    <div id="payment-content">
+                        <!-- Payment content will be loaded here -->
+                    </div>
+                    <button onclick="closePaymentModal()" class="mt-6 w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 rounded-xl font-medium transition-colors">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -789,7 +817,7 @@
             {
                 id: 1,
                 name: "Luxury Percale Sheet Set",
-                price: 189.99,
+                price: 2850000,
                 category: "sheets",
                 rating: 4.9,
                 image: `<svg viewBox="0 0 200 150" class="w-full h-full">
@@ -804,7 +832,7 @@
             {
                 id: 2,
                 name: "Down Alternative Comforter",
-                price: 249.99,
+                price: 3750000,
                 category: "comforters",
                 rating: 4.8,
                 image: `<svg viewBox="0 0 200 150" class="w-full h-full">
@@ -819,7 +847,7 @@
             {
                 id: 3,
                 name: "Memory Foam Pillow Set",
-                price: 129.99,
+                price: 1950000,
                 category: "pillows",
                 rating: 4.7,
                 image: `<svg viewBox="0 0 200 150" class="w-full h-full">
@@ -835,7 +863,7 @@
             {
                 id: 4,
                 name: "Bamboo Fiber Duvet Cover",
-                price: 159.99,
+                price: 2400000,
                 category: "sheets",
                 rating: 4.9,
                 image: `<svg viewBox="0 0 200 150" class="w-full h-full">
@@ -850,7 +878,7 @@
             {
                 id: 5,
                 name: "Weighted Blanket",
-                price: 199.99,
+                price: 3000000,
                 category: "comforters",
                 rating: 4.6,
                 image: `<svg viewBox="0 0 200 150" class="w-full h-full">
@@ -869,7 +897,7 @@
             {
                 id: 6,
                 name: "Silk Pillowcase Set",
-                price: 89.99,
+                price: 1350000,
                 category: "pillows",
                 rating: 4.8,
                 image: `<svg viewBox="0 0 200 150" class="w-full h-full">
@@ -884,7 +912,7 @@
             {
                 id: 7,
                 name: "Linen Sheet Set",
-                price: 219.99,
+                price: 3300000,
                 category: "sheets",
                 rating: 4.7,
                 image: `<svg viewBox="0 0 200 150" class="w-full h-full">
@@ -899,7 +927,7 @@
             {
                 id: 8,
                 name: "All-Season Comforter",
-                price: 299.99,
+                price: 4500000,
                 category: "comforters",
                 rating: 4.9,
                 image: `<svg viewBox="0 0 200 150" class="w-full h-full">
@@ -912,6 +940,11 @@
                 description: "Temperature-regulating comforter perfect for year-round comfort"
             }
         ];
+
+        // Format price in Rupiah
+        function formatRupiah(price) {
+            return 'Rp ' + price.toLocaleString('id-ID');
+        }
 
         // Initialize App
         function init() {
@@ -975,7 +1008,7 @@
                         <h3 class="text-xl font-semibold mb-2 text-gray-900">${product.name}</h3>
                         <p class="text-gray-600 mb-4 text-sm leading-relaxed">${product.description}</p>
                         <div class="flex justify-between items-center">
-                            <span class="text-2xl font-bold text-gradient">$${product.price}</span>
+                            <span class="text-2xl font-bold text-gradient">${formatRupiah(product.price)}</span>
                             <button onclick="addToCart(${product.id})" class="btn-primary text-white px-6 py-3 rounded-xl font-medium">
                                 Add to Cart
                             </button>
@@ -1068,7 +1101,7 @@
                             <h3 class="text-xl font-semibold mb-2 text-gray-900">${product.name}</h3>
                             <p class="text-gray-600 mb-4 text-sm leading-relaxed">${product.description}</p>
                             <div class="flex justify-between items-center">
-                                <span class="text-2xl font-bold text-gradient">$${product.price}</span>
+                                <span class="text-2xl font-bold text-gradient">${formatRupiah(product.price)}</span>
                                 <button onclick="addToCart(${product.id})" class="btn-primary text-white px-6 py-3 rounded-xl font-medium">
                                     Add to Cart
                                 </button>
@@ -1142,7 +1175,7 @@
                         </div>
                         <div class="flex-1">
                             <h3 class="text-lg font-semibold text-gray-900">${item.name}</h3>
-                            <p class="text-gray-600">$${item.price}</p>
+                            <p class="text-gray-600">${formatRupiah(item.price)}</p>
                         </div>
                         <div class="flex items-center space-x-3">
                             <button onclick="updateQuantity(${item.id}, -1)" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors">
@@ -1158,7 +1191,7 @@
                             </button>
                         </div>
                         <div class="text-right">
-                            <p class="text-lg font-bold text-gradient">$${(item.price * item.quantity).toFixed(2)}</p>
+                            <p class="text-lg font-bold text-gradient">${formatRupiah(item.price * item.quantity)}</p>
                             <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700 text-sm font-medium mt-1">
                                 Remove
                             </button>
@@ -1166,7 +1199,7 @@
                     </div>
                 `).join('');
                 
-                document.getElementById('cart-total').textContent = `$${getCartTotal().toFixed(2)}`;
+                document.getElementById('cart-total').textContent = formatRupiah(getCartTotal());
             }
         }
 
@@ -1191,17 +1224,19 @@
                             <p class="text-sm text-gray-500">Qty: ${item.quantity}</p>
                         </div>
                     </div>
-                    <span class="font-semibold">$${(item.price * item.quantity).toFixed(2)}</span>
+                    <span class="font-semibold">${formatRupiah(item.price * item.quantity)}</span>
                 </div>
             `).join('');
             
-            checkoutSubtotal.textContent = `$${subtotal.toFixed(2)}`;
-            checkoutTax.textContent = `$${tax.toFixed(2)}`;
-            checkoutTotal.textContent = `$${total.toFixed(2)}`;
+            checkoutSubtotal.textContent = formatRupiah(subtotal);
+            checkoutTax.textContent = formatRupiah(tax);
+            checkoutTotal.textContent = formatRupiah(total);
         }
 
         function processOrder(event) {
             event.preventDefault();
+            
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
             
             // Create new order
             const newOrder = {
@@ -1210,24 +1245,22 @@
                 items: [...cart],
                 total: getCartTotal(),
                 status: 'Processing',
-                trackingNumber: 'KYN' + Math.random().toString(36).substr(2, 9).toUpperCase()
+                trackingNumber: 'KYN' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+                paymentMethod: paymentMethod
             };
+            
+            // Show payment modal based on method
+            showPaymentModal(paymentMethod, newOrder);
             
             orders.push(newOrder);
             cart = [];
             updateCartCount();
             updateOrderIndicator();
             
-            showNotification('Order placed successfully! Thank you for your purchase.', 'success');
-            
             // Simulate order status updates
             setTimeout(() => {
                 updateOrderStatus(newOrder.id, 'Shipped');
             }, 5000);
-            
-            setTimeout(() => {
-                showPage('orders');
-            }, 2000);
         }
 
         function updateOrderStatus(orderId, status) {
@@ -1280,7 +1313,7 @@
                                 </div>
                                 <div class="mt-2 md:mt-0 flex items-center space-x-4">
                                     <span class="px-3 py-1 ${statusColor} text-sm rounded-full font-medium">${order.status}</span>
-                                    <span class="text-lg font-bold text-gradient">$${order.total.toFixed(2)}</span>
+                                    <span class="text-lg font-bold text-gradient">${formatRupiah(order.total)}</span>
                                 </div>
                             </div>
                             
@@ -1292,9 +1325,9 @@
                                         </div>
                                         <div class="flex-1">
                                             <p class="font-medium text-gray-900">${item.name}</p>
-                                            <p class="text-sm text-gray-500">Qty: ${item.quantity} × $${item.price}</p>
+                                            <p class="text-sm text-gray-500">Qty: ${item.quantity} × ${formatRupiah(item.price)}</p>
                                         </div>
-                                        <span class="font-semibold text-gray-900">$${(item.price * item.quantity).toFixed(2)}</span>
+                                        <span class="font-semibold text-gray-900">${formatRupiah(item.price * item.quantity)}</span>
                                     </div>
                                 `).join('')}
                             </div>
@@ -1446,6 +1479,221 @@
             event.target.reset();
         }
 
+        function showPaymentModal(paymentMethod, order) {
+            const modal = document.getElementById('payment-modal');
+            const content = document.getElementById('payment-content');
+            
+            let paymentContent = '';
+            
+            switch(paymentMethod) {
+                case 'card':
+                    paymentContent = `
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Payment Successful!</h3>
+                            <p class="text-gray-600 mb-4">Your order has been placed successfully.</p>
+                            <div class="bg-gray-50 p-4 rounded-xl">
+                                <p class="text-sm text-gray-600">Order ID: <span class="font-semibold">${order.trackingNumber}</span></p>
+                                <p class="text-sm text-gray-600">Total: <span class="font-semibold">${formatRupiah(order.total)}</span></p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'qris':
+                    paymentContent = `
+                        <div class="text-center">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Scan QRIS Code</h3>
+                            <div class="bg-white border-2 border-gray-200 rounded-xl p-6 mb-4">
+                                <div class="w-48 h-48 mx-auto bg-gray-100 rounded-lg flex items-center justify-center mb-4">
+                                    <svg viewBox="0 0 200 200" class="w-full h-full">
+                                        <rect width="200" height="200" fill="white"/>
+                                        <!-- QR Code pattern -->
+                                        <rect x="10" y="10" width="60" height="60" fill="black"/>
+                                        <rect x="20" y="20" width="40" height="40" fill="white"/>
+                                        <rect x="30" y="30" width="20" height="20" fill="black"/>
+                                        
+                                        <rect x="130" y="10" width="60" height="60" fill="black"/>
+                                        <rect x="140" y="20" width="40" height="40" fill="white"/>
+                                        <rect x="150" y="30" width="20" height="20" fill="black"/>
+                                        
+                                        <rect x="10" y="130" width="60" height="60" fill="black"/>
+                                        <rect x="20" y="140" width="40" height="40" fill="white"/>
+                                        <rect x="30" y="150" width="20" height="20" fill="black"/>
+                                        
+                                        <!-- Random pattern -->
+                                        <rect x="90" y="30" width="10" height="10" fill="black"/>
+                                        <rect x="110" y="30" width="10" height="10" fill="black"/>
+                                        <rect x="90" y="50" width="10" height="10" fill="black"/>
+                                        <rect x="110" y="50" width="10" height="10" fill="black"/>
+                                        <rect x="100" y="40" width="10" height="10" fill="black"/>
+                                        
+                                        <rect x="30" y="90" width="10" height="10" fill="black"/>
+                                        <rect x="50" y="90" width="10" height="10" fill="black"/>
+                                        <rect x="70" y="90" width="10" height="10" fill="black"/>
+                                        <rect x="90" y="90" width="10" height="10" fill="black"/>
+                                        <rect x="110" y="90" width="10" height="10" fill="black"/>
+                                        <rect x="130" y="90" width="10" height="10" fill="black"/>
+                                        <rect x="150" y="90" width="10" height="10" fill="black"/>
+                                        <rect x="170" y="90" width="10" height="10" fill="black"/>
+                                        
+                                        <rect x="90" y="110" width="10" height="10" fill="black"/>
+                                        <rect x="110" y="110" width="10" height="10" fill="black"/>
+                                        <rect x="130" y="110" width="10" height="10" fill="black"/>
+                                        <rect x="150" y="110" width="10" height="10" fill="black"/>
+                                        <rect x="170" y="110" width="10" height="10" fill="black"/>
+                                        
+                                        <rect x="90" y="130" width="10" height="10" fill="black"/>
+                                        <rect x="110" y="130" width="10" height="10" fill="black"/>
+                                        <rect x="130" y="130" width="10" height="10" fill="black"/>
+                                        <rect x="150" y="130" width="10" height="10" fill="black"/>
+                                        <rect x="170" y="130" width="10" height="10" fill="black"/>
+                                        
+                                        <rect x="90" y="150" width="10" height="10" fill="black"/>
+                                        <rect x="110" y="150" width="10" height="10" fill="black"/>
+                                        <rect x="130" y="150" width="10" height="10" fill="black"/>
+                                        <rect x="150" y="150" width="10" height="10" fill="black"/>
+                                        <rect x="170" y="150" width="10" height="10" fill="black"/>
+                                        
+                                        <rect x="90" y="170" width="10" height="10" fill="black"/>
+                                        <rect x="110" y="170" width="10" height="10" fill="black"/>
+                                        <rect x="130" y="170" width="10" height="10" fill="black"/>
+                                        <rect x="150" y="170" width="10" height="10" fill="black"/>
+                                        <rect x="170" y="170" width="10" height="10" fill="black"/>
+                                    </svg>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2">Scan with any QRIS-enabled app</p>
+                                <div class="bg-gray-50 p-3 rounded-lg">
+                                    <p class="text-xs text-gray-600">Order ID: <span class="font-semibold">${order.trackingNumber}</span></p>
+                                    <p class="text-xs text-gray-600">Amount: <span class="font-semibold">${formatRupiah(order.total)}</span></p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500">Payment will be processed automatically after scanning</p>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'bca':
+                    const bcaVA = '8017' + Math.random().toString().substr(2, 8);
+                    paymentContent = `
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-blue-600 font-bold text-lg">BCA</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">BCA Virtual Account</h3>
+                            <div class="bg-blue-50 border border-blue-200 p-6 rounded-xl mb-4">
+                                <p class="text-sm text-gray-600 mb-2">Virtual Account Number:</p>
+                                <p class="text-2xl font-bold text-blue-600 mb-4 tracking-wider">${bcaVA}</p>
+                                <p class="text-sm text-gray-600 mb-2">Amount to Pay:</p>
+                                <p class="text-xl font-bold text-gray-900">${formatRupiah(order.total)}</p>
+                            </div>
+                            <div class="text-left bg-gray-50 p-4 rounded-xl">
+                                <p class="text-sm font-semibold text-gray-900 mb-2">Payment Instructions:</p>
+                                <ol class="text-xs text-gray-600 space-y-1">
+                                    <li>1. Open BCA mobile app or visit ATM</li>
+                                    <li>2. Select "Transfer" → "Virtual Account"</li>
+                                    <li>3. Enter the VA number above</li>
+                                    <li>4. Confirm payment amount</li>
+                                    <li>5. Complete the transaction</li>
+                                </ol>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-4">Order ID: ${order.trackingNumber}</p>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'bni':
+                    const bniVA = '9881' + Math.random().toString().substr(2, 8);
+                    paymentContent = `
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-orange-600 font-bold text-lg">BNI</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">BNI Virtual Account</h3>
+                            <div class="bg-orange-50 border border-orange-200 p-6 rounded-xl mb-4">
+                                <p class="text-sm text-gray-600 mb-2">Virtual Account Number:</p>
+                                <p class="text-2xl font-bold text-orange-600 mb-4 tracking-wider">${bniVA}</p>
+                                <p class="text-sm text-gray-600 mb-2">Amount to Pay:</p>
+                                <p class="text-xl font-bold text-gray-900">${formatRupiah(order.total)}</p>
+                            </div>
+                            <div class="text-left bg-gray-50 p-4 rounded-xl">
+                                <p class="text-sm font-semibold text-gray-900 mb-2">Payment Instructions:</p>
+                                <ol class="text-xs text-gray-600 space-y-1">
+                                    <li>1. Open BNI mobile app or visit ATM</li>
+                                    <li>2. Select "Transfer" → "Virtual Account Billing"</li>
+                                    <li>3. Enter the VA number above</li>
+                                    <li>4. Verify payment details</li>
+                                    <li>5. Complete the transaction</li>
+                                </ol>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-4">Order ID: ${order.trackingNumber}</p>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'mandiri':
+                    const mandiriVA = '7019' + Math.random().toString().substr(2, 8);
+                    paymentContent = `
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <span class="text-yellow-600 font-bold text-sm">MANDIRI</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">Mandiri Virtual Account</h3>
+                            <div class="bg-yellow-50 border border-yellow-200 p-6 rounded-xl mb-4">
+                                <p class="text-sm text-gray-600 mb-2">Virtual Account Number:</p>
+                                <p class="text-2xl font-bold text-yellow-600 mb-4 tracking-wider">${mandiriVA}</p>
+                                <p class="text-sm text-gray-600 mb-2">Amount to Pay:</p>
+                                <p class="text-xl font-bold text-gray-900">${formatRupiah(order.total)}</p>
+                            </div>
+                            <div class="text-left bg-gray-50 p-4 rounded-xl">
+                                <p class="text-sm font-semibold text-gray-900 mb-2">Payment Instructions:</p>
+                                <ol class="text-xs text-gray-600 space-y-1">
+                                    <li>1. Open Livin' by Mandiri app or visit ATM</li>
+                                    <li>2. Select "Bayar" → "Virtual Account"</li>
+                                    <li>3. Enter the VA number above</li>
+                                    <li>4. Confirm payment amount</li>
+                                    <li>5. Complete the transaction</li>
+                                </ol>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-4">Order ID: ${order.trackingNumber}</p>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            content.innerHTML = paymentContent;
+            modal.classList.remove('hidden');
+            
+            // Auto close for card payments and show success
+            if (paymentMethod === 'card') {
+                setTimeout(() => {
+                    closePaymentModal();
+                    showNotification('Order placed successfully! Thank you for your purchase.', 'success');
+                    setTimeout(() => {
+                        showPage('orders');
+                    }, 1000);
+                }, 3000);
+            }
+        }
+        
+        function closePaymentModal() {
+            const modal = document.getElementById('payment-modal');
+            modal.classList.add('hidden');
+            
+            // If not card payment, show success notification and redirect
+            const currentPayment = document.querySelector('input[name="payment"]:checked')?.value;
+            if (currentPayment !== 'card') {
+                showNotification('Payment instructions sent! Complete payment to process your order.', 'success');
+                setTimeout(() => {
+                    showPage('orders');
+                }, 1000);
+            }
+        }
+
         function showNotification(message, type) {
             const notification = document.createElement('div');
             notification.className = `fixed top-6 right-6 px-6 py-4 rounded-xl shadow-lg z-50 transform transition-all duration-300 ${
@@ -1513,5 +1761,5 @@
         // Initialize app
         init();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9919253070f281f2',t:'MTc2MDk2OTkxOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9919325a045781f2',t:'MTc2MDk3MDQ2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
