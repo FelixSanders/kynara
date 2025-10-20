@@ -26,19 +26,21 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build React app
+      - name: Build Vite app
         run: npm run build
 
       - name: Verify build output
         run: |
-          echo "Listing build directory..."
-          ls -R build || (echo "❌ No build folder found!" && exit 1)
+          echo "Listing dist directory..."
+          ls -R dist || (echo "❌ No dist folder found!" && exit 1)
+          echo "Checking index.html base path:"
+          grep -Eo '<script.*src=.*>' dist/index.html || true
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
-          path: ./build
+          path: ./dist     # ✅ matches Vite outDir in vite.config.ts
           retention-days: 1
 
   deploy:
